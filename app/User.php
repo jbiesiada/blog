@@ -36,4 +36,31 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function articles()
+    {
+        return $this->hasMany('App\Article')->latest();
+    }
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+    public function isWriter()
+    {
+        if($this->level>0)
+            return true;
+        return false;
+    }
+    public function isAdmin()
+    {
+        if($this->level>1)
+            return true;
+        return false;
+    }
+    public function image()
+    {
+        if(!empty($this->image))
+            return $this->image;
+        return 'http://placehold.it/64x64';
+    }
 }

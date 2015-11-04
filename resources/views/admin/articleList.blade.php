@@ -1,4 +1,4 @@
-@extends('layouts.front')
+@extends('layouts.back')
 @section('content')
 @foreach($articles as $article)
 <div class="media">
@@ -8,7 +8,7 @@
     <div class="media-body">
         <h4 class="media-heading">
         <span class="lead">
-        <a href="{{url('articles',[$article->id])}}">
+        <a href="{{action('ArticlesController@edit',[$article->id])}}">
 			{{$article->title}}
 		</a>
 		    by <a href="#">{{$article->user->name}}</a>

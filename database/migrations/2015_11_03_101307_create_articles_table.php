@@ -13,12 +13,17 @@ class CreateArticlesTable extends Migration
     public function up()
     {
         Schema::create('articles', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('title');
-            $table->string('body');
+            $table->longText('body');
             $table->integer('user_id')->unsigned();
             $table->timestamps();
-        });
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+          });
 
     }
 

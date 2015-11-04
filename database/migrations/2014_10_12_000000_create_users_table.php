@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
@@ -21,6 +22,14 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+        DB::table('users')->insert(
+            array(
+                'name'  => env('ADMINNAME',''),
+                'email'  => env('ADMINEMAIL',''),
+                'level'     =>  2,
+                'password'  => bcrypt(env('ADMINPASS','')),
+            )
+        );
     }
 
     /**

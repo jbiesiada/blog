@@ -1,10 +1,12 @@
 <?php
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('articles');
 });
-
-Route::get('articles','ArticlesController@index');
-Route::get('articles/create','ArticlesController@create');
-Route::get('articles/{id}','ArticlesController@show');
-Route::post('articles','ArticlesController@store');
+Route::post('/articles/{articles}/comment','ArticlesController@comment');
+Route::get('/articles/admin/list','ArticlesController@adminList');
+Route::resource('articles','ArticlesController');
+Route::controllers([
+	'auth'	=>	'Auth\AuthController',
+	'password'	=>	'Auth\PasswordController'
+]);
