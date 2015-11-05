@@ -61,6 +61,6 @@ class User extends Model implements AuthenticatableContract,
     {
         if(!empty($this->image))
             return $this->image;
-        return 'http://placehold.it/64x64';
+        return 'http://www.gravatar.com/avatar/'.md5(strtolower(trim($this->email)));
     }
 }

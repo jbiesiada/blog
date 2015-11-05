@@ -13,7 +13,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('navigations.backHeader',function($view){
+            $view->with('user',\Auth::user());
+        });
+        view()->composer('navigations.backSidebar',function($view){
+            $view->with('user',\Auth::user());
+        });
     }
 
     /**

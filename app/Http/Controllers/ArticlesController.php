@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
 use \Auth;
+use App\Image;
 use App\Article;
 use App\Comment;
 use App\Http\Controllers\Controller;
@@ -20,28 +21,33 @@ class ArticlesController extends Controller
     public function index()
     {
     	$articles = Article::latest()->get();
-    	return view('articles.index',compact('articles'));
+        return view('articles.index',compact('articles'));
     }
     public function show($article)
     {
-    	return view('articles.show',compact('article'));
+        return view('articles.show',compact('article'));
     }
     public function create()
     {
-    	return view('articles.create');
+        return view('articles.create');
     }
     public function store(ArticleRequest $request)
     {
-        Auth::user()->articles()->create($request->all());
+        // dd($request->file('image'));
+        $article = Auth::user()->articles()->create($request->all());
+        Image::upload($request,$article);
         return redirect('articles/admin/list');
     }
     public function edit($article)
     {
+        if(Auth::user()->id != $article->user_id)
+            return redirect('articles/admin/list');
         return view('articles.edit',compact('article'));        
     }
     public function update($article,ArticleRequest $request)
     {
         $article->update($request->all());
+        Image::upload($request,$article);
         return redirect('articles/admin/list');
     }
     public function comment($article,Request $request)

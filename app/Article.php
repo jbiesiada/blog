@@ -22,16 +22,18 @@ class Article extends Model
     {
         return $this->hasMany('App\Comment')->latest();
     }
-    public function thumb()
+    public function thumb($size)
     {
-        if(!empty($this->image))
-            return $this->image;
-        return 'http://placehold.it/64x64';
+        $image = Image::where('model_name','=','Article')->where('foreign_id','=',$this->id)->first();        
+        if(!empty($image))
+            return $image->thumb($size);
+        return 'http://placehold.it/'.$size;
     }
     public function image()
     {
-        if(!empty($this->image))
-            return $this->image;
+        $image = Image::where('model_name','=','Article')->where('foreign_id','=',$this->id)->first();
+        if(!empty($image))
+            return $image->url;
         return 'http://placehold.it/900x300';
     }
 }
