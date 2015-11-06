@@ -10,7 +10,7 @@ class Image extends Model
 
    	public static function upload($request,$model)
    	{
-        if(!empty($request->file('image')->getClientOriginalName()))
+        if(!empty($request->file('image')))
         {
         	$folder = base_path() . '/public/images/';
 	        if(!file_exists($folder))
@@ -54,5 +54,9 @@ class Image extends Model
     public function thumb($size)
     {
         return "/thumb/".$size."/".$this->filename();
+    }
+    public function kill()
+    {
+        $this->delete();
     }
 }

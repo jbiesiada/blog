@@ -36,4 +36,11 @@ class Article extends Model
             return $image->url;
         return 'http://placehold.it/900x300';
     }
+    public function kill()
+    {
+        $image = Image::where('model_name','=','Article')->where('foreign_id','=',$this->id)->first();
+        if(!empty($image))
+            $image->kill();
+        $this->delete();
+    }
 }

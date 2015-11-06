@@ -1,4 +1,4 @@
 @extends('layouts.back')
 @section('content')
-@include('articles.list',['action'=>'ArticlesController@edit']);
+@include('articles.list',['action'=>'ArticlesController@edit','admin'=>true])
 @stop

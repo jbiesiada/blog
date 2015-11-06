@@ -1,3 +1,4 @@
+<div class="col-md-6">
 @foreach($articles as $article)
 <div class="media">
     <a class="pull-left" href="#">
@@ -12,8 +13,16 @@
 		    by <a href="#">{{$article->user->name}}</a>
 		</span>
             <small>{{$article->created_at}}</small>
+            @if(!empty($admin) && \Auth::user()->id == $article->user->id)
+            <span class="pull-right">
+            {!! Form::model($article, ['method'=>'DELETE','action' => ['ArticlesController@destroy',$article->id]]) !!}
+            <button type="button" class="btn btn-danger"><i class='fa fa-fw fa-trash'></i></button>
+            {!! Form::close() !!}
+            </span>
+            @endif
         </h4>
         <p>{{$article->shortbody()}}</p>
     </div>
 </div>
 @endforeach
+</div>

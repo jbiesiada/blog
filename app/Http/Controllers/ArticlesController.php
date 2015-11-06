@@ -54,7 +54,7 @@ class ArticlesController extends Controller
     {
         $this->validate($request,['body'=>'required']);
         $comment = $article->comments()->create($request->all());
-    	Auth::user()->comments()->save($comment);
+        Auth::user()->comments()->save($comment);
         return redirect(url('articles',[$article->id]));
     }
     public function adminList()
@@ -64,5 +64,10 @@ class ArticlesController extends Controller
         else
             $articles = Auth::user()->articles;
         return view('admin.articleList',compact('articles'));
+    }
+    public function destroy($article)
+    {
+        $article->kill();
+        return redirect('articles/admin/list');
     }
 }
