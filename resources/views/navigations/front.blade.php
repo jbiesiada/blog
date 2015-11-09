@@ -21,7 +21,7 @@
                     <a href="/auth/logout">logout</a>
                 </li>
                 <li>
-                    <a href="/admin">admin</a>
+                    <a href="/admin">panel</a>
                 </li>
             @else
               	<li>
