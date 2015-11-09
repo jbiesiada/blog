@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="https://almsaeedstudio.com/themes/AdminLTE/dist/css/skins/_all-skins.min.css">
 		<link rel="stylesheet" href="https://almsaeedstudio.com/themes/AdminLTE/dist/css/AdminLTE.min.css">
 		<link rel="stylesheet" href="https://almsaeedstudio.com/themes/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+		<link rel="stylesheet" href="http://bootstrap-wysiwyg.github.io/bootstrap3-wysiwyg/dist/bootstrap3-wysihtml5.min.css">
 	</head>
 	<body class='skin-blue sidebar-mini'>
 		<div class='wrapper'>
@@ -25,15 +26,18 @@
 					@yield('footer')
 				</section>
 			</div>
-		<script async="" src="https://almsaeedstudio.com/themes/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-		<script async="" src="https://almsaeedstudio.com/themes/AdminLTE/bootstrap/js/bootstrap.min.js"></script>
-		<script async="" src="https://almsaeedstudio.com/themes/AdminLTE/plugins/fastclick/fastclick.js"></script>
-		<script async="" src="https://almsaeedstudio.com/themes/AdminLTE/plugins/sparkline/jquery.sparkline.min.js"></script>
-		<script async="" src="https://almsaeedstudio.com/themes/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-		<script async="" src="https://almsaeedstudio.com/themes/AdminLTE/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-		<script async="" src="https://almsaeedstudio.com/themes/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-		<script async="" src="https://almsaeedstudio.com/themes/AdminLTE/plugins/chartjs/Chart.min.js"></script>
-		<script async="" src="https://almsaeedstudio.com/themes/AdminLTE/dist/js/pages/dashboard2.js"></script>
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="https://almsaeedstudio.com/themes/AdminLTE/plugins/fastclick/fastclick.js"></script>
+		<script src="https://almsaeedstudio.com/themes/AdminLTE/plugins/sparkline/jquery.sparkline.min.js"></script>
+		<script src="https://almsaeedstudio.com/themes/AdminLTE/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+		<script src="https://almsaeedstudio.com/themes/AdminLTE/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+		<script src="https://almsaeedstudio.com/themes/AdminLTE/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+		<script src="https://almsaeedstudio.com/themes/AdminLTE/plugins/chartjs/Chart.min.js"></script>
+		<script src="https://almsaeedstudio.com/themes/AdminLTE/dist/js/pages/dashboard2.js"></script>
+		<script src="https://cdn.jsdelivr.net/bootstrap.wysihtml5/0.0.2/bootstrap-wysihtml5-0.0.2.min.js"></script>
+		<script src="http://bootstrap-wysiwyg.github.io/bootstrap3-wysiwyg/components/wysihtml5x/dist/wysihtml5x-toolbar.min.js"></script>
+		@yield('scripts')
 		</div>
 	</body>
 </html>

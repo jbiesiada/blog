@@ -3,10 +3,10 @@
 <div class='col-lg-8'>
 <h1>{{$article->title}}</h1>
 <p class="lead">
-    by <a href="#">{{$article->user->name}}</a>
+    przez <a href="#">{{$article->user->name}}</a>
 </p>
 <hr>
-<p><span class="glyphicon glyphicon-time"></span> Posted on {{$article->created_at}}</p>
+<p><span class="glyphicon glyphicon-time"></span> Dodano {{$article->created_at}}</p>
 <hr>
 <img class="img-responsive" src="{{$article->image()}}" alt="">
 <hr>

@@ -6,6 +6,7 @@ use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
 use \Auth;
 use App\Image;
+use App\User;
 use App\Article;
 use App\Comment;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,7 @@ class ArticlesController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index','show']]);
-        $this->middleware('writer', ['only' => ['create','edit']]);
+        $this->middleware('writer', ['only' => ['create','edit','adminList','destroy']]);
     }
     public function index()
     {
@@ -40,7 +41,7 @@ class ArticlesController extends Controller
     }
     public function edit($article)
     {
-        if(Auth::user()->id != $article->user_id)
+        if(Auth::user()->id != $article->user_id && !Auth::user()->isAdmin())
             return redirect('articles/admin/list');
         return view('articles.edit',compact('article'));        
     }
@@ -57,17 +58,24 @@ class ArticlesController extends Controller
         Auth::user()->comments()->save($comment);
         return redirect(url('articles',[$article->id]));
     }
-    public function adminList()
+    public function adminList($user_id = null)
     {
-        if(Auth::user()->isAdmin())
+        $selected_user = null; 
+        if(!empty($user_id))
+        {
+            $selected_user = User::find($user_id);
+            $articles = $selected_user->articles;
+        }
+        else if(Auth::user()->isAdmin())
             $articles = Article::latest()->get();
         else
             $articles = Auth::user()->articles;
-        return view('admin.articleList',compact('articles'));
+        return view('admin.articleList',compact('articles','selected_user'));
     }
     public function destroy($article)
     {
+        $user_id = \Request::has('selected_user')?\Request::get('selected_user'):null;
         $article->kill();
-        return redirect('articles/admin/list');
+        return redirect('articles/admin/list/'.$user_id);
     }
 }

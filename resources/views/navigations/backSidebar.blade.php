@@ -12,6 +12,12 @@
 		<ul class="sidebar-menu">
 			<li class="header">MAIN NAVIGATION</li>
 			<li>
+				<a href="/users/{{$user->id}}/edit">
+				<i class="fa fa-fw fa-user"></i> <span>Profil</span>
+				</a>
+			</li> 
+			@if($user->isWriter())
+			<li>
 				<a href="/articles/admin/list">
 				<i class="fa fa-fw fa-list"></i> <span>Posty</span>
 				</a>
@@ -21,9 +27,10 @@
 				<i class="fa fa-fw fa-edit"></i> <span>Dodaj Post</span>
 				</a>
 			</li>
+			@endif
 			@if($user->isAdmin())
 				<li>
-					<a href="/users/index">
+					<a href="/users">
 					<i class="fa fa-fw fa-users"></i> <span>Użytkownicy</span>
 					</a>
 				</li>

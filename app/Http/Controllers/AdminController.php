@@ -12,11 +12,13 @@ class AdminController extends Controller
 	public function __construct() 
 	{
         $this->middleware('auth');
+        // $this->middleware('writer');
 	}
     public function index()
     {
-    	return view('admin.index');
+        return view('admin.index');
     }
+
     public function thumb($size,$filename){
     	$dims = explode('x', $size);
         $check = true;
@@ -24,9 +26,12 @@ class AdminController extends Controller
             $check = false;
         else
         {            
-            foreach ($dims as $dim) {
+            foreach ($dims as $dim)
+            {
                 if(!is_numeric($dim)&&!empty($dim))
+                {
                     $check = false;
+                }
             }
         }
         if(!$check)
@@ -34,7 +39,6 @@ class AdminController extends Controller
         $xsize = $dims[0];
         $ysize = $dims[1];
 
-// dd($xsize,$ysize);
         $folder = base_path() . '/public/thumb/';
         if(!file_exists($folder))
         {
@@ -46,16 +50,16 @@ class AdminController extends Controller
             $constraint->aspectRatio();
             $constraint->upsize();
         };
-        if(!empty($xsize)&& empty($ysize) || $image->width()<$image->height())
+        if(!empty($xsize) && empty($ysize) || $image->width()<$image->height())
         {
             $image->resize($xsize,null,$calb);
         }
-        if(empty($xsize)&& !empty($ysize) ||$image->width()>=$image->height())
+        if(empty($xsize) && !empty($ysize) ||$image->width()>=$image->height())
         {
             $image->resize(null,$ysize,$calb);
         }
 
-        if(!empty($xsize)&& !empty($ysize))
+        if(!empty($xsize) && !empty($ysize))
         {            
             $image->crop($xsize,$ysize);            
         }

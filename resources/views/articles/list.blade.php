@@ -13,10 +13,10 @@
 		    by <a href="#">{{$article->user->name}}</a>
 		</span>
             <small>{{$article->created_at}}</small>
-            @if(!empty($admin) && \Auth::user()->id == $article->user->id)
+            @if(!empty($admin) && (\Auth::user()->id == $article->user->id || \Auth::user()->isAdmin()))
             <span class="pull-right">
-            {!! Form::model($article, ['method'=>'DELETE','action' => ['ArticlesController@destroy',$article->id]]) !!}
-            <button type="button" class="btn btn-danger"><i class='fa fa-fw fa-trash'></i></button>
+            {!! Form::model($article, ['method'=>'DELETE','action' => ['ArticlesController@destroy',$article->id,'selected_user'=>$selected_user?$selected_user->id:null]]) !!}
+            <button type="submit" class="btn btn-danger"><i class='fa fa-fw fa-trash'></i></button>
             {!! Form::close() !!}
             </span>
             @endif
