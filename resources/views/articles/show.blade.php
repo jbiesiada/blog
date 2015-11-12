@@ -14,20 +14,20 @@
 	{{$article->body}}
 </article>
 <hr>
+<div id="comments">
 @if($user = \Auth::user())
 <div class="well">
 {!! Form::open(['action' => ['ArticlesController@comment',$article->id]]) !!}
 <div class='form-group'>
     <h4>Skomentuj: </h4>
-	{!! Form::textarea('body',null,['rows'=>3, 'class'=>'form-control']) !!}
+    {!! Form::textarea('body',null,['rows'=>3, 'class'=>'form-control']) !!}
 </div>
 <div class='form-group'>
-	{!! Form::submit('Skomentuj',['class'=>'btn btn-primary']) !!}
+    {!! Form::submit('Skomentuj',['class'=>'btn btn-primary']) !!}
 </div>
 {!! Form::close() !!}
 </div>
 @endif
-
 @foreach($article->comments as $comment)
 <div class="media">
     <a class="pull-left" href="#">
@@ -37,9 +37,26 @@
         <h4 class="media-heading">{{$comment->user->name}}
             <small>{{$comment->created_at}}</small>
         </h4>
-        {{$comment->body}}
+        @include('articles.comment_body',['comment'=>$comment,'callback'=>action('ArticlesController@show',$comment->article->id)])
     </div>
 </div>
 @endforeach
 </div>
+</div>
 @stop
+@section('scripts')
+<script type="text/javascript">
+    $(".edit_comment").click(function(){
+        var id = this.id;
+        $(this).hide();
+        $("#show"+id).hide();
+        $("#edit"+id).show();
+    });
+    $(".edit_cancel").click(function(){
+        var id = this.id;
+        $(".edit_comment").show();
+        $("#show"+id).show();
+        $("#edit"+id).hide();
+    });
+</script>
+@endsection

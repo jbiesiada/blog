@@ -1,11 +1,14 @@
 <header class="main-header">
-	<a href="/" class="logo">
+	<a href="/admin" class="logo">
 		<span class="logo-mini"><b>B</b>b</span>
 		<span class="logo-lg"><b>Blog</b>bies</span>
 	</a>
 	<nav class="navbar navbar-static-top" role="navigation">
 		<div class="navbar-custom-menu">
-			<ul class="nav navbar-nav">         
+			<ul class="nav navbar-nav"> 
+				<li>
+					<a href="/">Powrót</a>
+				</li>        
 				<li class="dropdown user user-menu">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<img src="{{$user->image()}}" class="user-image" alt="User Image">

@@ -5,6 +5,9 @@ Route::get('/', function () {
 });
 Route::get('/thumb/{size}/{filename}','AdminController@thumb');
 Route::get('/admin','AdminController@index');
+Route::get('/articles/{articles}/comments','ArticlesController@comments');
+Route::put('/articles/{comment}/comments','ArticlesController@commentupdate');
+Route::delete('/articles/{comment}/comments','ArticlesController@commentdelete');
 Route::get('/users/setwriter/{id}','UsersController@setwriter');
 Route::get('/users/unsetwriter/{id}','UsersController@unsetwriter');
 Route::get('/articles/admin/list/{user_id?}','ArticlesController@adminList');

@@ -12,7 +12,7 @@ class Article extends Model
     ];
     public function shortbody()
     {
-    	return str_limit($this->body, $limit = 100, $end = '...');
+    	return str_limit($this->body, $limit = 500, $end = '...');
     }
     public function user()
     {

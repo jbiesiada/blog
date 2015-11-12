@@ -34,7 +34,6 @@ class ArticlesController extends Controller
     }
     public function store(ArticleRequest $request)
     {
-        // dd($request->file('image'));
         $article = Auth::user()->articles()->create($request->all());
         Image::upload($request,$article);
         return redirect('articles/admin/list');
@@ -56,7 +55,26 @@ class ArticlesController extends Controller
         $this->validate($request,['body'=>'required']);
         $comment = $article->comments()->create($request->all());
         Auth::user()->comments()->save($comment);
-        return redirect(url('articles',[$article->id]));
+        return redirect(url('articles',[$article->id])."#comments");
+    }
+    public function comments($article)
+    {
+        return view('admin.comments',compact('article'));
+    }
+    public function commentupdate($comment,Request $request)
+    {
+        if(Auth::user() != $comment->user && !Auth::user()->isAdmin())
+            return redirect($request->get('callback'));
+        $this->validate($request,['body'=>'required']);
+        $comment->update($request->all());
+        return redirect($request->get('callback'));
+    }
+    public function commentdelete($comment,Request $request)
+    {
+        if(Auth::user() != $comment->user && !Auth::user()->isAdmin())
+            return redirect($request->get('callback'));
+        $comment->delete();
+        return redirect($request->get('callback'));
     }
     public function adminList($user_id = null)
     {

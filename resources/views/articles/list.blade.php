@@ -1,8 +1,9 @@
-<div class="col-md-6">
+<div class="col-md-9">
 @foreach($articles as $article)
+<div class="well">
 <div class="media">
     <a class="pull-left" href="#">
-        <img class="media-object" src="{{$article->thumb('64x64')}}" alt="">
+        <img class="media-object" src="{{$article->thumb('128x128')}}" alt="">
     </a>
     <div class="media-body">
         <h4 class="media-heading">
@@ -23,6 +24,7 @@
         </h4>
         <p>{{$article->shortbody()}}</p>
     </div>
+</div>
 </div>
 @endforeach
 </div>

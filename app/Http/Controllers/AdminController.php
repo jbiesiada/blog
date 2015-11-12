@@ -11,8 +11,7 @@ class AdminController extends Controller
 {
 	public function __construct() 
 	{
-        $this->middleware('auth');
-        // $this->middleware('writer');
+        $this->middleware('auth',['except' => 'thumb']);
 	}
     public function index()
     {

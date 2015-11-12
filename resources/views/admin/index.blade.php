@@ -3,15 +3,10 @@
 <h1>Towoje komentarze:</h1>
 @stop
 @section('content')
-@forelse(\Auth::user()->comments as $comment)
-<p>
-	<div>{{$comment->body}}</div> 
-	w artykule
-	<p>{{$comment->article->title}}</p>
-</p>
-@empty
-brak
-@endforelse
+<div class="col-md-4">
+@include('admin.comment_element',['comments'=>\Auth::user()->comments,'callback'=>action('AdminController@index')])
+</div>
 @stop
 @section('footer')
 @stop
+
