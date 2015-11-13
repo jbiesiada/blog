@@ -18,7 +18,8 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
-    public function thumb($size,$filename){
+    public function thumb($size,$filename)
+    {
     	$dims = explode('x', $size);
         $check = true;
         if(count($dims)!='2')
