@@ -12,9 +12,9 @@ class Image extends Model
    	{
         if(!empty($request->file('image')))
         {
-        	$model_name = get_class($model);
-        	$model_name = explode("\\", $model_name);
-        	$model_name = $model_name[count($model_name)-1];
+            $model_name = get_class($model);
+            $model_name = explode("\\", $model_name);
+            $model_name = $model_name[count($model_name)-1];
             $imageName = $model->id .'_'.date('Y_m_d').'_'.strtr($request->file('image')->getClientOriginalName(), ' ', '_');
             $request->file('image')->move(
                 base_path() . '/public/images/', $imageName
