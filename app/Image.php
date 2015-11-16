@@ -12,12 +12,6 @@ class Image extends Model
    	{
         if(!empty($request->file('image')))
         {
-        	$folder = base_path() . '/public/images/';
-	        if(!file_exists($folder))
-	        {
-	    		mkdir($folder);
-	    		chmod($folder, 0755);        	
-	        }
         	$model_name = get_class($model);
         	$model_name = explode("\\", $model_name);
         	$model_name = $model_name[count($model_name)-1];
