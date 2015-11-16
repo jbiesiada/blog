@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
-   	protected $fillable = ['model_name','foreign_id','url'];
+    protected $fillable = ['model_name','foreign_id','url'];
 
-   	public static function upload($request,$model)
-   	{
+    public static function upload($request,$model)
+    {
         if(!empty($request->file('image')))
         {
             $model_name = get_class($model);
@@ -22,20 +22,20 @@ class Image extends Model
             chmod(base_path() . '/public/images/'. $imageName, 0755);
             $image = Image::where('model_name','=',$model_name)->where('foreign_id','=',$model->id)->first();
             if(empty($image))
-            {            	
-	            $image = Image::create([
-	                'model_name' => $model_name,
-	                'foreign_id' => $model->id,
-	                'url' => '/images/'. $imageName,
-	            ]);
+            {
+                $image = Image::create([
+                    'model_name' => $model_name,
+                    'foreign_id' => $model->id,
+                    'url' => '/images/'. $imageName,
+                ]);
             }
             else
             {
-            	$image->url = '/images/'. $imageName;
-            	$image->save();
+                $image->url = '/images/'. $imageName;
+                $image->save();
             }
         }
-   	}
+    }
     public function filename()
     {
         if(!empty($this->url))
