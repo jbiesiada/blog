@@ -6,7 +6,7 @@ class ImageThumber
 	protected $directory;
 	protected $width;
 	protected $height;
-	public $image;
+	protected $image;
 	protected $sizeDirectory;
 	protected $filename;
 
@@ -21,11 +21,16 @@ class ImageThumber
 		$this->sizeDirectory = $size;
 		$this->filename = $filename;
 	}
+	public function getResponse()
+	{
+		return $this->image->response('jpg');	
+	}
 	public function save()
 	{
 		$filePath = $this->directory . $this->sizeDirectory."/".$this->filename;
 		$this->image->save($filePath);
-        chmod($filePath, 0755);   
+        chmod($filePath, 0755);
+        return $this;  
 	}
 	public function refactor()
 	{
@@ -37,6 +42,7 @@ class ImageThumber
         {
             $this->image->fit($this->width,$this->height);
         }
+        return $this;  
 	}
 	public function aspectRatio()
 	{
@@ -45,6 +51,7 @@ class ImageThumber
 	        $constraint->aspectRatio();
 	        $constraint->upsize();
 	    };
+        return $this;  
 	}
 	public function makeThumbDirectory()
 	{
@@ -53,6 +60,7 @@ class ImageThumber
     		mkdir($this->directory);
     		chmod($this->directory, 0755);        	
         }		
+        return $this;  
 	}
 	public function makeSizeDirectory()
 	{
@@ -62,6 +70,7 @@ class ImageThumber
     		mkdir($folder);
     		chmod($folder, 0755);        	
         }
+        return $this;  
 	}
 	public function isForResize()
 	{

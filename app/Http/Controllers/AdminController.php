@@ -23,10 +23,7 @@ class AdminController extends Controller
         $imageThumber = new ImageThumber($size, $filename);
         if(!$imageThumber->isValid())
             return new Exception("Wrong image size");
-        $imageThumber->makeThumbDirectory();
-        $imageThumber->refactor();
-        $imageThumber->makeSizeDirectory();
-        $imageThumber->save();                
-		return $imageThumber->image->response('jpg');
+        $imageThumber->makeThumbDirectory()->refactor()->makeSizeDirectory()->save();                
+		return $imageThumber->response();
 	}
 }
