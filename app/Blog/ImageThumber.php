@@ -11,7 +11,7 @@ class ImageThumber
 	protected $filename;
 
 	
-	function __construct($size, $image, $filename)
+	function __construct($size, $filename)
 	{
     	$dims = explode('x', $size);
 		$this->width = $dims[0]?:null;
@@ -23,7 +23,7 @@ class ImageThumber
 	}
 	public function save()
 	{
-		$filePath = $this->directory . $this->sizeDirectory."/".$this->getFilename();
+		$filePath = $this->directory . $this->sizeDirectory."/".$this->filename;
 		$this->image->save($filePath);
         chmod($filePath, 0755);   
 	}
@@ -31,11 +31,11 @@ class ImageThumber
 	{
         if($this->isForResize())
         {
-            $this->image->resize($this->getWidth(),$this->getHeight(),$this->aspectRatio());
+            $this->image->resize($this->width,$this->height,$this->aspectRatio());
         }
         if($this->isForThumb())
         {
-            $this->image->fit($this->getWidth(),$this->getHeight());
+            $this->image->fit($this->width,$this->height);
         }
 	}
 	public function aspectRatio()
@@ -65,11 +65,11 @@ class ImageThumber
 	}
 	public function isForResize()
 	{
-		return (empty($this->getWidth()) || empty($this->getHeight()));
+		return (empty($this->width) || empty($this->height));
 	}
 	public function isForThumb()
 	{
-		return !(empty($this->getWidth()) || empty($this->getHeight()));
+		return !(empty($this->width) || empty($this->height));
 	}
 	public function isValid()
 	{
@@ -82,77 +82,5 @@ class ImageThumber
 	protected function isWidthValid()
 	{
 		return is_numeric($this->width)||is_null($this->width);
-	}
-
-    /**
-     * Gets the value of width.
-     *
-     * @return mixed
-     */
-    public function getWidth()
-    {
-        return $this->width;
-    }
-
-    /**
-     * Sets the value of width.
-     *
-     * @param mixed $width the width
-     *
-     * @return self
-     */
-    protected function setWidth($width)
-    {
-        $this->width = $width;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of height.
-     *
-     * @return mixed
-     */
-    public function getHeight()
-    {
-        return $this->height;
-    }
-
-    /**
-     * Sets the value of height.
-     *
-     * @param mixed $height the height
-     *
-     * @return self
-     */
-    protected function setHeight($height)
-    {
-        $this->height = $height;
-
-        return $this;
-    }
-
-    /**
-     * Gets the value of filename.
-     *
-     * @return mixed
-     */
-    public function getFilename()
-    {
-        return $this->filename;
-    }
-
-    /**
-     * Sets the value of filename.
-     *
-     * @param mixed $filename the filename
-     *
-     * @return self
-     */
-    protected function setFilename($filename)
-    {
-        $this->filename = $filename;
-
-        return $this;
-    }
+	}    
 }
